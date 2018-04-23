@@ -44,15 +44,13 @@ public class ClayPigeon {
 	}
 
 	public void Update(){
-		this.clay_pigeon.GetComponent<Rigidbody> ().velocity = this.clay_pigeon.transform.TransformDirection (Vector3.forward * speed);
 		if (this.clay_pigeon.GetComponent<CollisionController> ().flag) {
-			this.OnCollisionEnter (this.clay_pigeon.GetComponent<CollisionController> ().collision);
+			this.collisionHandler (this.clay_pigeon.GetComponent<CollisionController> ().collision);
 			this.clay_pigeon.GetComponent<CollisionController> ().flag = false;
 		}
 	}
 
-	public void OnCollisionEnter(Collision collision){
-		Debug.Log (collision.gameObject.name [0]);
+	public void collisionHandler (Collision collision){
 
 		if (collision.gameObject.name [0] == 'b') {
 			this.life -= Player.Instance.ATK - this.DEF;
@@ -61,7 +59,7 @@ public class ClayPigeon {
 				this.isFree = true;
 				ScoreController.Instance.addScore (bonus);
 			}
-		} 
+		}
 		else {
 			Player.Instance.life -= 1;
 			this.isFree = true;

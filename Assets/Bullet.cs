@@ -28,7 +28,6 @@ public class Bullet {
 	}
 
 	public void Update(){
-		this.bullet.GetComponent<Rigidbody> ().velocity = this.bullet.transform.TransformDirection (Vector3.forward * speed);
 		if (bullet.transform.position.z > 20)
 			enable = false;
 	}

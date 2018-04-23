@@ -59,14 +59,10 @@ public class Player : Singleton<Player> {
 			this.transform.RotateAround (this.transform.position, Vector3.up, X);
 		}
 		foreach (Bullet bullet in clip_used) {
-			if (bullet.enable)
-				bullet.Update ();
-			else
+			if (!bullet.enable)
 				recollectBullet ();
-		}
-		if (Input.GetMouseButtonDown (0) && Time.time > next_fire && scene_controller.status ) {
-			this.clip_free.Remove (shoot ());
-			next_fire += fire_rate * Time.deltaTime;
+			else
+				bullet.Update ();
 		}
 	}
 
@@ -106,6 +102,7 @@ public class Player : Singleton<Player> {
 		bullet = this.clip_free[0];
 		bullet.initialize (this.transform);
 		clip_used.Add (bullet);
+		this.clip_used.Remove (bullet);
 		return bullet;
 	}
 

@@ -10,10 +10,10 @@ public class CollisionController : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision){
 		if (collision.gameObject.name [0] == 'b' || collision.gameObject.name[0] == 'w') {
+			Debug.Log ("Collision");
 			flag = true;
 			this.collision = collision;
 			Vector3 position = this.transform.position;
-			Debug.Log (position.x + ", " + position.y + ", " + position.z);
 			Instantiate(Resources.Load("explosion"), new Vector3(position.x - 1, position.y, position.z), new Quaternion(0, 0, 90, 0));
 		}
 	}
